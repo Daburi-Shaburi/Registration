@@ -103,6 +103,23 @@ function matchPassword() {
     return isValid;
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const bdayInput = document.getElementById('bday');
+    const today = new Date();
+    const cutoffDate = new Date(
+        today.getFullYear() - 18, 
+        today.getMonth(),         
+        today.getDate()           
+    );
+    const year = cutoffDate.getFullYear();
+    const month = String(cutoffDate.getMonth() + 1).padStart(2, '0');
+    const day = String(cutoffDate.getDate()).padStart(2, '0');
+    const maxDateString = `${year}-${month}-${day}`;
+
+    bdayInput.setAttribute('max', maxDateString);
+    console.log(`Maximum allowed date of birth set to: ${maxDateString}`);
+});
+
 function validateAndSubmit(event) {
     const fieldsAreValid = checkRequiredFields();
     const strengthIsValid = checkPasswordStrength();
